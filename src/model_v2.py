@@ -27,11 +27,12 @@ def build_model():
     # Replace classifier
     # -------------------------------------------------
 
+    # Keep classifier identical to V1
     in_features = model.fc.in_features
 
-    model.fc = nn.Sequential(
-        nn.Dropout(0.3),
-        nn.Linear(in_features, NUM_CLASSES)
+    model.fc = nn.Linear(
+        in_features,
+        NUM_CLASSES
     )
 
     return model
