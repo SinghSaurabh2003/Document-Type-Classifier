@@ -160,9 +160,13 @@ def main():
             checkpoint["model_state_dict"]
         )
 
-        optimizer.load_state_dict(
-            checkpoint["optimizer_state_dict"]
-        )
+        try:
+            optimizer.load_state_dict(
+                checkpoint["optimizer_state_dict"]
+            )
+            print("Optimizer state loaded.")
+        except:
+            print("Optimizer state NOT loaded (expected for V2 fine-tuning).")
 
         start_epoch = checkpoint["epoch"]
 
