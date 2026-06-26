@@ -177,7 +177,7 @@ st.markdown(
 
     <h4>Document Type Classifier</h4>
 
-    Built using ❤️ with PyTorch, ResNet18 and Streamlit
+    Built using ❤️ by Saurabh with PyTorch, ResNet18 and Streamlit
 
     </center>
     """,
