@@ -13,6 +13,19 @@
 
 ---
 
+## 🚀 Live Demo
+
+🌐 **Streamlit Application:**
+
+**https://docvision-ai-qbghmwmxc3wdmhtbenkme7.streamlit.app/**
+
+Try uploading a scanned document image to receive:
+- ✅ Document Type Prediction
+- 📊 Confidence Score
+- 🏆 Top-3 Predictions
+
+---
+
 ## 📌 Overview
 
 **DocVision AI** is a deep learning-based document classification system capable of automatically categorizing scanned document images into predefined document categories using **Transfer Learning** with **ResNet18**.
@@ -100,7 +113,7 @@ DocVision-AI/
 ├── app.py
 ├── predict.py
 ├── evaluate.py
-├── train.py
+├── train_v2.py
 ├── requirements.txt
 │
 ├── checkpoints/
@@ -108,8 +121,8 @@ DocVision-AI/
 │     └── last_model.pth
 │
 ├── src/
-│     ├── config.py
-│     ├── model.py
+│     ├── config_v2.py
+│     ├── model_v2.py
 │     ├── dataset.py
 │     ├── dataloader.py
 │     ├── trainer.py
@@ -124,7 +137,7 @@ DocVision-AI/
 
 # 🏗️ Development Journey
 
-## Version 1
+## Version 1.1
 
 ### Objective
 
@@ -134,9 +147,34 @@ Develop an initial transfer learning model for document classification.
 
 - Dataset preprocessing
 - Transfer Learning using ResNet18
+- only using Fully Connected layer(last layer of resnet)
+- Evaluation pipeline
+- No. of epochs=10
+- best model and last model saved using checkpointing.
+
+### Limitation
+
+During evaluation, the model produced:
+
+- Validation Accuracy : **77%**
+- Test Accuracy : **less then 70%**
+
+---
+
+## Version 1.2
+
+### Objective
+
+Develop an transfer learning model for document classification.
+
+### Pipeline
+
+- Dataset preprocessing
+- Transfer Learning using ResNet18
 - Layer4 fine-tuning
 - Evaluation pipeline
-- Streamlit deployment
+- No. of epochs=10-25
+- best model and last model saved using checkpointing.
 
 ### Limitation
 
@@ -155,11 +193,20 @@ Investigation revealed that the training dataset contained only **6 Memo images*
 
 ### Improvements
 
-The complete training dataset was verified and corrected.
+The complete training dataset was verified and corrected using a python script.
 
 The missing Memo class images were restored, resulting in a balanced dataset containing approximately **20,000 images per class**.
 
 The model was resumed from the best checkpoint and fine-tuned further without retraining from scratch.
+
+- No. of epochs=25-35
+  
+- best model and last model saved using checkpointing.
+
+During evaluation, the model produced:
+
+- Validation Accuracy : **95.98%**
+- Test Accuracy : **89.66%**
 
 ### Final Results
 
@@ -245,7 +292,7 @@ The evaluation pipeline automatically generates:
 
 Future improvements include:
 
-- Support for all 16 RVL-CDIP document categories.
+- Support for all 16 RVL-CDIP document categories(Current pipeline support training of any number of classes just dataset and "NUM_CLASSES" needs to be changed).
 - Adoption of stronger vision backbones such as EfficientNet, ConvNeXt, or Vision Transformers (ViT).
 - Integration of OCR for combining visual and textual information.
 - Multi-page document classification.
